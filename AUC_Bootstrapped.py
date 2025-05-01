@@ -33,24 +33,24 @@ def compute_auc_with_se_and_pvalues(y_true, y_scores, baseline_values=[0.5, 0.96
     return auc_mean, auc_se, p_values, np.array(aucs)  # Return the AUC array for additional calculations
 
 # Example datasets
-y_true_1 = [1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-y_scores_1 = [26, 27, 19, 14, 23, 13, 2, 3, 4, 14, 0, 3, 2, 1, 8, 0, 1, 5, 6]
+y_true_1 = [1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] #FFPE HRDetect
+y_scores_1 = [26, 27, 19, 14, 23, 13, 2, 3, 4, 14, 0, 3, 2, 1, 8, 0, 1, 5, 6] #FFPE ShallowHRD score
 
-y_true_2 = [1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-y_scores_2 = [24, 26, 26, 15, 32, 11, 4, 8, 13, 17, 4, 6, 3, 0, 13, 12, 5, 24, 7]
+y_true_2 = [1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] #Fresh frozen 5X HRDetect
+y_scores_2 = [24, 26, 26, 15, 32, 11, 4, 8, 13, 17, 4, 6, 3, 0, 13, 12, 5, 24, 7] #Fresh Frozen 5X ShallowHRD score
 
-y_true_3 = [1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-y_scores_3 = [24, 22, 23, 10, 43, 24, 4, 8, 12, 11, 6, 7, 3, 0, 16, 6, 3, 28, 6]
+y_true_3 = [1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] #Fresh frozen 50X HRDetect
+y_scores_3 = [24, 22, 23, 10, 43, 24, 4, 8, 12, 11, 6, 7, 3, 0, 16, 6, 3, 28, 6] #Fresh Frozen 50X ShallowHRD score
 
 # Baseline AUC values to compare to
-baseline_values = [0.5, 0.9636, 1.0]
+baseline_values = [0.5, 0.9636, 1.0] #Random classifier, Value from Diossy et al., and perfect classifier
 
 # Perform bootstrapping for each set
 auc_1, se_1, pvals_1, aucs_1 = compute_auc_with_se_and_pvalues(y_true_1, y_scores_1, baseline_values)
 auc_2, se_2, pvals_2, aucs_2 = compute_auc_with_se_and_pvalues(y_true_2, y_scores_2, baseline_values)
 auc_3, se_3, pvals_3, aucs_3 = compute_auc_with_se_and_pvalues(y_true_3, y_scores_3, baseline_values)
 
-# Print results with scientific notation for very small p-values
+# Print results
 print(f"Set FFPE - AUC: {auc_1:.4f} ± {se_1:.4f}")
 print(f"P-values for Set FFPE (vs baseline values):")
 for baseline in baseline_values:
